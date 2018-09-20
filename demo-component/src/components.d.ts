@@ -60,6 +60,39 @@ declare global {
   }
 }
 
+
+declare global {
+
+  namespace StencilComponents {
+    interface MyDemo {
+      'name': string;
+    }
+  }
+
+  interface HTMLMyDemoElement extends StencilComponents.MyDemo, HTMLStencilElement {}
+
+  var HTMLMyDemoElement: {
+    prototype: HTMLMyDemoElement;
+    new (): HTMLMyDemoElement;
+  };
+  interface HTMLElementTagNameMap {
+    'my-demo': HTMLMyDemoElement;
+  }
+  interface ElementTagNameMap {
+    'my-demo': HTMLMyDemoElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'my-demo': JSXElements.MyDemoAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyDemoAttributes extends HTMLAttributes {
+      'name'?: string;
+    }
+  }
+}
+
 declare global { namespace JSX { interface StencilJSX {} } }
 
 export declare function defineCustomElements(window: any): void;
