@@ -61,6 +61,39 @@ declare global {
   }
 }
 
+
+declare global {
+
+  namespace StencilComponents {
+    interface MyNumberDisplay {
+      'value': number;
+    }
+  }
+
+  interface HTMLMyNumberDisplayElement extends StencilComponents.MyNumberDisplay, HTMLStencilElement {}
+
+  var HTMLMyNumberDisplayElement: {
+    prototype: HTMLMyNumberDisplayElement;
+    new (): HTMLMyNumberDisplayElement;
+  };
+  interface HTMLElementTagNameMap {
+    'my-number-display': HTMLMyNumberDisplayElement;
+  }
+  interface ElementTagNameMap {
+    'my-number-display': HTMLMyNumberDisplayElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'my-number-display': JSXElements.MyNumberDisplayAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyNumberDisplayAttributes extends HTMLAttributes {
+      'value'?: number;
+    }
+  }
+}
+
 declare global { namespace JSX { interface StencilJSX {} } }
 
 export declare function defineCustomElements(window: any): void;
