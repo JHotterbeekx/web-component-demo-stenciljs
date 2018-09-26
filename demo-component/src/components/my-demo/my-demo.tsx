@@ -8,11 +8,14 @@ export class MyDemo {
 
   // Indicate that name should be a public property on the component
   @Prop() name: string;
+  
+  private counter = 0;
 
   render() {
     return (
       <p>
-        My name is {this.name}
+       The number is {this.counter} <br />
+       <button onClick={() => this.counter++}>Increase</button>
       </p>
     );
   }

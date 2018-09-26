@@ -64,6 +64,41 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface MyCounter {
+      'start': number;
+      'step': number;
+    }
+  }
+
+  interface HTMLMyCounterElement extends StencilComponents.MyCounter, HTMLStencilElement {}
+
+  var HTMLMyCounterElement: {
+    prototype: HTMLMyCounterElement;
+    new (): HTMLMyCounterElement;
+  };
+  interface HTMLElementTagNameMap {
+    'my-counter': HTMLMyCounterElement;
+  }
+  interface ElementTagNameMap {
+    'my-counter': HTMLMyCounterElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'my-counter': JSXElements.MyCounterAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyCounterAttributes extends HTMLAttributes {
+      'start'?: number;
+      'step'?: number;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface MyDemo {
       'name': string;
     }
