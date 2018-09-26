@@ -1,17 +1,56 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
   <script src="/build/demo-component.js"></script>
 
 </head>
+
 <body>
 
-  <my-counter start="12"></my-counter>
-  <br /><br />
-  <my-number-display value="23"></my-number-display>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    class Demo extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { numberValue: 12 };
+        this.counterRef = React.createRef();
+      }
+
+      componentDidMount() {
+        this.counterRef.current.addEventListener("change", e => this.updateValue(e.detail));
+      }
+
+      componentWillUnmount() {
+        this.counterRef.current.removeEventListener("change");
+      }
+
+      updateValue(value) {
+        console.log('change', value);
+        this.setState({ numberValue: value });
+      }
+
+      render() {
+        return (
+          <div>
+            <my-counter ref={this.counterRef} start={this.state.numberValue} oncustomChange={(value) => this.updateValue(value)}></my-counter>
+            <br /><br />
+            <my-number-display value={this.state.numberValue}></my-number-display>
+          </div>
+        );
+      }
+    }
+    ReactDOM.render(<Demo />, document.getElementById('root')
+  );
+  </script>
 
 </body>
+
 </html>

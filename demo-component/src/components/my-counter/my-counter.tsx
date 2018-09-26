@@ -19,16 +19,17 @@ export class MyCounter {
 
   increase() {
     this.value = this.value + this.step;
-    this.emitChange();
+    this.emitChange(this.value);
   }
 
   decrease() {
     this.value = this.value - this.step;
-    this.emitChange();
+    this.emitChange(this.value);
   }
 
-  emitChange() {
-    this.change.emit(this.value);
+  emitChange(value: number) {
+    console.log('changeEmitted', value);
+    this.change.emit(value);
   }
 
   render() {
