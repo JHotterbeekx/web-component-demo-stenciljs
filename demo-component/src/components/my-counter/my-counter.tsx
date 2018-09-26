@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@stencil/core';
+import { Component, Prop, State, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'my-counter',
@@ -8,6 +8,8 @@ export class MyCounter {
 
   @Prop() start: number = 1;
   @Prop() step: number = 1;
+
+  @Event() change: EventEmitter;
   
   @State() value: number;
   
@@ -17,10 +19,16 @@ export class MyCounter {
 
   increase() {
     this.value = this.value + this.step;
+    this.emitChange();
   }
 
   decrease() {
     this.value = this.value - this.step;
+    this.emitChange();
+  }
+
+  emitChange() {
+    this.change.emit(this.value);
   }
 
   render() {
